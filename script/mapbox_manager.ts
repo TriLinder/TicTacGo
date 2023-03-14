@@ -20,19 +20,22 @@ export class MapboxManager {
                 container: 'map',
                 style: 'mapbox://styles/mapbox/streets-v12',
                 center: this.ticTacGo.configManager.config["boardPosition"],
-                zoom: 9
+                zoom: 15
         });
 
         this.map.on("load", function() {
+            const ll = new this.mapboxgl.LngLat(...this.ticTacGo.configManager.config["boardPosition"]);
+            const bounds = ll.toBounds(this.ticTacGo.configManager.config["boardMeters"] / 2);
+
             this.map.addSource("gameBoardCanvasSource", {
                 type: "canvas",
                 canvas: "game_board_canvas",
                 coordinates: [
-                            [91.4461, 21.5006],
-                            [100.3541, 21.5006],
-                            [100.3541, 13.9706],
-                            [91.4461, 13.9706]
-                        ],
+                                bounds.getNorthWest().toArray(), 
+                                bounds.getNorthEast().toArray(), 
+                                bounds.getSouthEast().toArray(), 
+                                bounds.getSouthWest().toArray()
+                            ],
                 animate: true
             })
 
