@@ -1,5 +1,7 @@
 *.pyc
 venv/*
 config.json
+cert.pem
+key.pem
 script/tsconfig.json
 script/build/*

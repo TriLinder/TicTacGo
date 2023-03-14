@@ -2,6 +2,10 @@ from flask import Flask, render_template, send_file
 from flask_socketio import SocketIO
 from pathlib import Path
 import json
+import ssl
+
+ssl_context = ssl.SSLContext()
+ssl_context.load_cert_chain("cert.pem", "key.pem")
 
 app = Flask(__name__)
 socketio = SocketIO(app)
@@ -22,4 +26,4 @@ def get_config():
     return config
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True, ssl_context=ssl_context)
