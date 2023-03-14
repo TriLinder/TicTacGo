@@ -9,6 +9,20 @@ export class GameBoardTile {
         this.setState(initalState);
     }
 
+    public render(pixelSize: number): HTMLCanvasElement {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d")!;
+
+        canvas.width = pixelSize;
+        canvas.height = pixelSize;
+
+        ctx.fillStyle = "black";
+        ctx.font = `${pixelSize / 2}px serif`;
+        ctx.fillText(this.state.toString(), pixelSize / 2, pixelSize / 2);
+
+        return canvas;
+    }
+
     public setState(state: number) {
         if (state == Empty || state == X || state == O) {
             this.state = state;
