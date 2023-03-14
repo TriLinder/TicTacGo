@@ -17,15 +17,14 @@ export class TicTacGo {
         this.configManager = new ConfigManager();
         await this.configManager.load();
 
-        this.gameBoard = new GameBoard(3);
+        this.gameBoard = new GameBoard(this.configManager.config["boardTiles"]);
         this.mapboxManager = new MapboxManager(this, mapboxgl);
 
-        // Render the gameboard at 30hz
+        // Render the gameboard at 1hz
         setInterval(function() {
             const gameBoardCanvas = (document.getElementById("game_board_canvas") as HTMLCanvasElement);
-
             this.gameBoard.renderToCanvas(gameBoardCanvas);
-        }.bind(this), 1000 / 30);
+        }.bind(this), 1000);
     }
 }
 

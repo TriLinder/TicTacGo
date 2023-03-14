@@ -17,10 +17,26 @@ export class GameBoardTile {
         canvas.height = pixelSize;
 
         ctx.fillStyle = "black";
-        ctx.font = `${pixelSize / 2}px serif`;
-        ctx.fillText(this.state.toString(), pixelSize / 2, pixelSize / 2);
+        ctx.lineWidth = pixelSize / 25;
+        ctx.font = `${pixelSize / 2}px sans-serif`;
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+
+        ctx.strokeRect(0, 0, pixelSize, pixelSize);
+        ctx.fillText(this.getStateLetter(), pixelSize / 2, pixelSize / 2);
 
         return canvas;
+    }
+
+    public getStateLetter(): string {
+        switch (this.state) {
+            case Empty:
+                return "-";
+            case X:
+                return "X";
+            case O:
+                return "O";
+        }
     }
 
     public setState(state: number) {
