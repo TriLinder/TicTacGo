@@ -4,6 +4,7 @@ export const O = 2;
 
 export class GameBoardTile {
     public state: number;
+    public isSelected: boolean;
     
     constructor(initalState: number) {
         this.setState(initalState);
@@ -16,14 +17,27 @@ export class GameBoardTile {
         canvas.width = pixelSize;
         canvas.height = pixelSize;
 
+        // Draw background if selected
+        if (this.isSelected) {
+            ctx.fillStyle = "#14fc69";
+            ctx.globalAlpha = 0.5;
+
+            ctx.fillRect(0, 0, pixelSize, pixelSize);
+            
+            ctx.globalAlpha = 1;
+        }
+
+        // Draw text
         ctx.fillStyle = "black";
         ctx.lineWidth = pixelSize / 25;
         ctx.font = `${pixelSize / 2}px sans-serif`;
         ctx.textBaseline = "middle";
         ctx.textAlign = "center";
 
-        ctx.strokeRect(0, 0, pixelSize, pixelSize);
         ctx.fillText(this.getStateLetter(), pixelSize / 2, pixelSize / 2);
+
+        // Draw border
+        ctx.strokeRect(0, 0, pixelSize, pixelSize);
 
         return canvas;
     }
