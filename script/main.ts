@@ -1,6 +1,7 @@
 import { ConfigManager } from "./config_manager";
 import { GameBoard } from "./board/game_board";
 import { MapboxManager } from "./mapbox_manager";
+import { GeolocationManager } from "./geolocation_manager";
 
 export let ticTacGo: TicTacGo;
 
@@ -8,6 +9,7 @@ export class TicTacGo {
     public configManager: ConfigManager;
     public gameBoard: GameBoard;
     public mapboxManager: MapboxManager;
+    public geolocationManager: GeolocationManager;
 
     constructor(mapboxgl: any) {
         this.initialize(mapboxgl);
@@ -19,6 +21,8 @@ export class TicTacGo {
 
         this.gameBoard = new GameBoard(this.configManager.config["boardTiles"]);
         this.mapboxManager = new MapboxManager(this, mapboxgl);
+
+        this.geolocationManager = new GeolocationManager();
 
         // Render the gameboard at 1hz
         setInterval(function() {

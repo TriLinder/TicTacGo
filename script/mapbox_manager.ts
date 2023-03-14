@@ -5,6 +5,7 @@ export class MapboxManager {
 
     public mapboxgl: any;
     public map: any;
+    public geolocateControl: any;
 
     constructor(ticTacGo: TicTacGo, mapboxgl: any) {
         this.ticTacGo = ticTacGo;
@@ -22,6 +23,17 @@ export class MapboxManager {
                 center: this.ticTacGo.configManager.config["boardPosition"],
                 zoom: 15
         });
+
+        this.geolocateControl = new this.mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+
+                trackUserLocation: true,
+                showUserHeading: true
+            });
+
+        this.map.addControl(this.geolocateControl);
 
         this.map.on("load", function() {
             const ll = new this.mapboxgl.LngLat(...this.ticTacGo.configManager.config["boardPosition"]);
@@ -44,6 +56,8 @@ export class MapboxManager {
                 type: "raster",
                 source: "gameBoardCanvasSource"
             });
+
+            this.geolocateControl.trigger();
 
         }.bind(this));
     }
