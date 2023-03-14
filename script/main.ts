@@ -11,12 +11,21 @@ export class TicTacGo {
 
     constructor(mapboxgl: any) {
         this.initialize(mapboxgl);
-;    }
+    }
 
     private async initialize(mapboxgl: any) {
         this.configManager = new ConfigManager();
         await this.configManager.load();
+
+        this.gameBoard = new GameBoard(3);
         this.mapboxManager = new MapboxManager(this, mapboxgl);
+
+        // Render the gameboard at 30hz
+        setInterval(function() {
+            const gameBoardCanvas = (document.getElementById("game_board_canvas") as HTMLCanvasElement);
+
+            this.gameBoard.renderToCanvas(gameBoardCanvas);
+        }.bind(this), 1000 / 30);
     }
 }
 

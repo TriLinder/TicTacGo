@@ -17,11 +17,31 @@ export class MapboxManager {
         this.mapboxgl.accessToken = this.ticTacGo.configManager.config["mapboxToken"];
         
         this.map = new this.mapboxgl.Map({
-                container: 'map', // container ID
-                // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-                style: 'mapbox://styles/mapbox/streets-v12', // style URL
-                center: [-74.5, 40], // starting position [lng, lat]
-                zoom: 9 // starting zoom
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: this.ticTacGo.configManager.config["boardPosition"],
+                zoom: 9
         });
+
+        this.map.on("load", function() {
+            this.map.addSource("gameBoardCanvasSource", {
+                type: "canvas",
+                canvas: "game_board_canvas",
+                coordinates: [
+                            [91.4461, 21.5006],
+                            [100.3541, 21.5006],
+                            [100.3541, 13.9706],
+                            [91.4461, 13.9706]
+                        ],
+                animate: true
+            })
+
+            this.map.addLayer({
+                id: "gameBoardLayer",
+                type: "raster",
+                source: "gameBoardCanvasSource"
+            });
+
+        }.bind(this));
     }
 }
