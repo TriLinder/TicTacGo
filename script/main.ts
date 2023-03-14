@@ -1,7 +1,31 @@
+import { ConfigManager } from "./config_manager";
 import { GameBoard } from "./board/game_board";
+import { MapboxManager } from "./mapbox_manager";
 
-let gameBoard = new GameBoard(3);
+export let ticTacGo: TicTacGo;
 
-const gameBoardCanvas = (document.getElementById("game_board_canvas") as HTMLCanvasElement);
+export class TicTacGo {
+    public configManager: ConfigManager;
+    public gameBoard: GameBoard;
+    public mapboxManager: MapboxManager;
 
-gameBoard.renderToCanvas(gameBoardCanvas);
+    constructor(mapboxgl: any) {
+        this.initialize(mapboxgl);
+;    }
+
+    private async initialize(mapboxgl: any) {
+        this.configManager = new ConfigManager();
+        await this.configManager.load();
+        this.mapboxManager = new MapboxManager(this, mapboxgl);
+    }
+}
+
+// A really hacky way to get mapboxgl. I'm sorry.
+// Wait for page load before initializing the main TicTacGo() class.
+declare const window: any;
+
+window.addEventListener("load", function() {
+    const mapboxgl = (window.mapboxgl as any);
+
+    ticTacGo = new TicTacGo(mapboxgl);
+});

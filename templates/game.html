@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TicTacGo</title>
+
+    <link href="/static/game.css" crossorigin="anonymous" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" crossorigin="anonymous" rel="stylesheet">
   </head>
   <body>
-    <h1>Hello, world!</h1>
-
-    <canvas id="game_board_canvas" width="512" height="512"></canvas>
+    <canvas id="game_board_canvas" width="512" height="512" style="display: none;"></canvas>
+    <div id="map"></div>
 
     <script src="/game_bundle.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js" crossorigin="anonymous"></script>
   </body>
 </html>
