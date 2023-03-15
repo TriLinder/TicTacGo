@@ -22,7 +22,7 @@ export class GameBoard {
         for (let x = 0; x < this.size; x++) {
             for (let y = 0; y < this.size; y++) {
                 const tile = this.board[x][y];
-                tile.setState(data[x][y]);
+                tile.setState(data["states"][x][y]);
             }
         }
     }
