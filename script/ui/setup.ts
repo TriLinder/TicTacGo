@@ -1,5 +1,6 @@
 import { TicTacGo } from "../main";
 import { SetupChooseTeam } from "./setup_elements/choose_team";
+import { SetupTileSizeConfigure } from "./setup_elements/tile_size_configure";
 
 export class Setup {
     private ticTacGo: TicTacGo;
@@ -7,6 +8,7 @@ export class Setup {
     public currentScreen: string | null;
 
     public chooseTeam: SetupChooseTeam
+    public tileSizeConfigure: SetupTileSizeConfigure;
 
     private setupDiv: HTMLDivElement;
 
@@ -16,6 +18,7 @@ export class Setup {
         this.currentScreen = "chooseTeam";
 
         this.chooseTeam = new SetupChooseTeam(this.ticTacGo);
+        this.tileSizeConfigure = new SetupTileSizeConfigure(this.ticTacGo);
 
         this.setupDiv = (document.getElementById("setup_div") as HTMLDivElement);
     }
@@ -30,5 +33,6 @@ export class Setup {
         }
 
         this.chooseTeam.update();
+        this.tileSizeConfigure.update();
     }
 }

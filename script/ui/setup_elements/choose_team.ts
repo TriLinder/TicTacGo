@@ -8,6 +8,8 @@ export class SetupChooseTeam {
 
     private playAsXButton: HTMLButtonElement;
     private playAsOButton: HTMLButtonElement;
+
+    private configureLink: HTMLLinkElement;
     
     constructor(ticTacGo: TicTacGo) {
         this.ticTacGo = ticTacGo;
@@ -17,8 +19,12 @@ export class SetupChooseTeam {
         this.playAsXButton = (document.getElementById("play_as_x_button") as HTMLButtonElement);
         this.playAsOButton = (document.getElementById("play_as_o_button") as HTMLButtonElement);
 
+        this.configureLink = (document.getElementById("configure_link") as HTMLLinkElement);
+
         this.playAsXButton.addEventListener("click", function() {this.playAsButtonClick(X)}.bind(this));
         this.playAsOButton.addEventListener("click", function() {this.playAsButtonClick(O)}.bind(this));
+
+        this.configureLink.addEventListener("click", function() {this.ticTacGo.uiManager.setup.currentScreen = "tileSizeConfigure";}.bind(this));
     }
 
     public update() {
