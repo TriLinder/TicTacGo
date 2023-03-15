@@ -2,6 +2,7 @@ import { ConfigManager } from "./config_manager";
 import { GameBoard } from "./board/game_board";
 import { MapboxManager } from "./mapbox_manager";
 import { GeolocationManager } from "./geolocation_manager";
+import { UiManager } from "./ui/ui_manager";
 
 export let ticTacGo: TicTacGo;
 
@@ -10,6 +11,7 @@ export class TicTacGo {
     public gameBoard: GameBoard;
     public mapboxManager: MapboxManager;
     public geolocationManager: GeolocationManager;
+    public uiManager: UiManager;
 
     constructor(mapboxgl: any) {
         this.initialize(mapboxgl);
@@ -23,6 +25,7 @@ export class TicTacGo {
         this.gameBoard = new GameBoard(this, this.configManager.config["boardTiles"]);
 
         this.geolocationManager = new GeolocationManager(this);
+        this.uiManager = new UiManager(this);
 
         // Update and render the gameboard at 1hz
         setInterval(function() {
@@ -30,6 +33,11 @@ export class TicTacGo {
             this.gameBoard.update();
             this.gameBoard.renderToCanvas(gameBoardCanvas);
         }.bind(this), 1000);
+
+        // Update the UI at 30hz
+        setInterval(function() {
+            this.uiManager.update();
+        }.bind(this), 1000 / 30);
     }
 }
 
@@ -41,4 +49,7 @@ window.addEventListener("load", function() {
     const mapboxgl = (window.mapboxgl as any);
 
     ticTacGo = new TicTacGo(mapboxgl);
+    
+    // Hide the loading screen
+    document.getElementById("loading_screen").style.display = "none";
 });
