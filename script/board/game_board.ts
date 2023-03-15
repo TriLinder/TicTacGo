@@ -15,6 +15,15 @@ export class GameBoard {
         this.reset();
     }
 
+    public parseBoardUpdateSocket(data) {
+        for (let x = 0; x < this.size; x++) {
+            for (let y = 0; y < this.size; y++) {
+                const tile = this.board[x][y];
+                tile.state = data[x][y];
+            }
+        }
+    }
+
     public update() {
         // Update all tiles
         this.selectedTile = null;
