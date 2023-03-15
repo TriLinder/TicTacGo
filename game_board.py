@@ -66,7 +66,7 @@ class GameBoard:
                     else:
                         left_to_right_diaognal = []
 
-                    if x >= self.tiles_required_to_win - 1: 
+                    if x >= self.tiles_required_to_win - 1 and y <= self.size - self.tiles_required_to_win: 
                         right_to_left_diaognal = [self.board[x - n][y + n] for n in range(self.tiles_required_to_win)]
                     else:
                         right_to_left_diaognal = []
