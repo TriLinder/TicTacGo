@@ -15,6 +15,8 @@ export class TicTacGo {
     public geolocationManager: GeolocationManager;
     public uiManager: UiManager;
 
+    public playable: boolean;
+
     constructor(mapboxgl: any, socketio: any) {
         this.initialize(mapboxgl, socketio);
     }
@@ -29,6 +31,8 @@ export class TicTacGo {
 
         this.geolocationManager = new GeolocationManager(this);
         this.uiManager = new UiManager(this);
+
+        this.playable = true;
 
         // Update and render the gameboard at 15hz
         setInterval(function() {

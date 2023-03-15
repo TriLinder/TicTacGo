@@ -15,4 +15,8 @@ export class UiManager {
     public update() {
         this.hud.update();
     }
+
+    public parseGameStatus(gameStatus) {
+        this.hud.parseGameStatus(gameStatus);
+    }
 }

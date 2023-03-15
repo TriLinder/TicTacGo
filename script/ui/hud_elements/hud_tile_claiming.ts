@@ -26,6 +26,10 @@ export class HudTileClaiming {
         this.tileAlreadyClaimedDiv.style.display = "none";
         this.tileClaimable.style.display = "none";
 
+        if (!this.ticTacGo.playable) {
+            return;
+        }
+
         const selectedTile = this.ticTacGo.gameBoard.selectedTile;
 
         if (!selectedTile) {
