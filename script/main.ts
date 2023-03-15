@@ -1,6 +1,7 @@
 import { ConfigManager } from "./config_manager";
 import { GameBoard } from "./board/game_board";
 import { MapboxManager } from "./mapbox_manager";
+import { SocketioManager } from "./socketio_manager";
 import { GeolocationManager } from "./geolocation_manager";
 import { UiManager } from "./ui/ui_manager";
 
@@ -10,18 +11,20 @@ export class TicTacGo {
     public configManager: ConfigManager;
     public gameBoard: GameBoard;
     public mapboxManager: MapboxManager;
+    public socketioManager: SocketioManager;
     public geolocationManager: GeolocationManager;
     public uiManager: UiManager;
 
-    constructor(mapboxgl: any) {
-        this.initialize(mapboxgl);
+    constructor(mapboxgl: any, socketio: any) {
+        this.initialize(mapboxgl, socketio);
     }
 
-    private async initialize(mapboxgl: any) {
+    private async initialize(mapboxgl: any, socketio: any) {
         this.configManager = new ConfigManager();
         await this.configManager.load();
 
         this.mapboxManager = new MapboxManager(this, mapboxgl);
+        this.socketioManager = new SocketioManager(this, socketio);
         this.gameBoard = new GameBoard(this, this.configManager.config["boardTiles"]);
 
         this.geolocationManager = new GeolocationManager(this);
@@ -41,14 +44,15 @@ export class TicTacGo {
     }
 }
 
-// A really hacky way to get mapboxgl. I'm sorry.
+// A really hacky way to get mapboxgl and socketio. I'm sorry.
 // Wait for page load before initializing the main TicTacGo() class.
 declare const window: any;
 
 window.addEventListener("load", function() {
     const mapboxgl = (window.mapboxgl as any);
+    const socketio = (window.io() as any);
 
-    ticTacGo = new TicTacGo(mapboxgl);
+    ticTacGo = new TicTacGo(mapboxgl, socketio);
     
     // Hide the loading screen
     document.getElementById("loading_screen").style.display = "none";
