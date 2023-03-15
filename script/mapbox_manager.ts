@@ -5,6 +5,9 @@ export class MapboxManager {
 
     public mapboxgl: any;
     public map: any;
+    
+    public gameBoardBounds: any;
+
     public geolocateControl: any;
 
     constructor(ticTacGo: TicTacGo, mapboxgl: any) {
@@ -35,18 +38,20 @@ export class MapboxManager {
 
         this.map.addControl(this.geolocateControl);
 
-        this.map.on("load", function() {
-            const ll = new this.mapboxgl.LngLat(...this.ticTacGo.configManager.config["boardPosition"]);
-            const bounds = ll.toBounds(this.ticTacGo.configManager.config["boardMeters"] / 2);
+        // Caulculate geographic bounds for the game board
+        // See https://docs.mapbox.com/mapbox-gl-js/api/geography/
+        const ll = new this.mapboxgl.LngLat(...this.ticTacGo.configManager.config["boardPosition"]);
+        this.gameBoardBounds = ll.toBounds(this.ticTacGo.configManager.config["boardMeters"] / 2);
 
+        this.map.on("load", function() {
             this.map.addSource("gameBoardCanvasSource", {
                 type: "canvas",
                 canvas: "game_board_canvas",
                 coordinates: [
-                                bounds.getNorthWest().toArray(), 
-                                bounds.getNorthEast().toArray(), 
-                                bounds.getSouthEast().toArray(), 
-                                bounds.getSouthWest().toArray()
+                                this.gameBoardBounds.getNorthWest().toArray(), 
+                                this.gameBoardBounds.getNorthEast().toArray(), 
+                                this.gameBoardBounds.getSouthEast().toArray(), 
+                                this.gameBoardBounds.getSouthWest().toArray()
                             ],
                 animate: true
             })

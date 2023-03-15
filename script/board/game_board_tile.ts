@@ -1,12 +1,19 @@
+import { TicTacGo } from "../main";
+
 export const Empty = 0;
 export const X = 1;
 export const O = 2;
 
 export class GameBoardTile {
+    private ticTacGo: TicTacGo;
+    
     public state: number;
     public isSelected: boolean;
     
-    constructor(initalState: number) {
+    public geographicBounds: any;
+
+    constructor(ticTacGo: TicTacGo, initalState: number) {
+        this.ticTacGo = ticTacGo; 
         this.setState(initalState);
     }
 
@@ -40,6 +47,16 @@ export class GameBoardTile {
         ctx.strokeRect(0, 0, pixelSize, pixelSize);
 
         return canvas;
+    }
+
+    public setGeographicBounds(northEast) {
+        const mapboxgl: any = this.ticTacGo.mapboxManager.mapboxgl;
+
+        const metersPerTile = this.ticTacGo.configManager.config["boardMeters"] / this.ticTacGo.configManager.config["boardTiles"];
+
+        // See https://docs.mapbox.com/mapbox-gl-js/api/geography/
+        this.geographicBounds = northEast.toBounds(metersPerTile);
+        this.geographicBounds.setNorthEast(northEast);
     }
 
     public getStateLetter(): string {

@@ -19,8 +19,8 @@ export class TicTacGo {
         this.configManager = new ConfigManager();
         await this.configManager.load();
 
-        this.gameBoard = new GameBoard(this.configManager.config["boardTiles"]);
         this.mapboxManager = new MapboxManager(this, mapboxgl);
+        this.gameBoard = new GameBoard(this, this.configManager.config["boardTiles"]);
 
         this.geolocationManager = new GeolocationManager();
 
