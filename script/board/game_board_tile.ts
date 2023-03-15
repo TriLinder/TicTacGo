@@ -17,6 +17,12 @@ export class GameBoardTile {
         this.setState(initalState);
     }
 
+    public update() {
+        // Select this tile if the player is inside the tile's bounds
+        const playersPosition = this.ticTacGo.geolocationManager.LngLat;
+        this.isSelected = this.geographicBounds.contains(playersPosition);
+    }
+
     public render(pixelSize: number): HTMLCanvasElement {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d")!;

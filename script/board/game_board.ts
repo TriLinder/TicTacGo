@@ -5,6 +5,7 @@ export class GameBoard {
     private ticTacGo: TicTacGo;
     
     public board: GameBoardTile[][] = [];
+    public selectedTile: GameBoardTile;
     public readonly size: number;
     
     constructor(ticTacGo: TicTacGo, size: number) {
@@ -12,6 +13,20 @@ export class GameBoard {
         this.size = size;
 
         this.reset();
+    }
+
+    public update() {
+        // Update all tiles
+        for (let x = 0; x < this.size; x++) {
+            for (let y = 0; y < this.size; y++) {
+                const tile = this.board[x][y];
+                tile.update();
+                
+                if (tile.isSelected) {
+                    this.selectedTile = tile;
+                }
+            }
+        }
     }
 
     public renderToCanvas(canvas: HTMLCanvasElement) {

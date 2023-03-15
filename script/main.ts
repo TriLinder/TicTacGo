@@ -22,11 +22,12 @@ export class TicTacGo {
         this.mapboxManager = new MapboxManager(this, mapboxgl);
         this.gameBoard = new GameBoard(this, this.configManager.config["boardTiles"]);
 
-        this.geolocationManager = new GeolocationManager();
+        this.geolocationManager = new GeolocationManager(this);
 
-        // Render the gameboard at 1hz
+        // Update and render the gameboard at 1hz
         setInterval(function() {
             const gameBoardCanvas = (document.getElementById("game_board_canvas") as HTMLCanvasElement);
+            this.gameBoard.update();
             this.gameBoard.renderToCanvas(gameBoardCanvas);
         }.bind(this), 1000);
     }
