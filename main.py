@@ -15,7 +15,7 @@ socketio = SocketIO(app)
 with open("config.json", "r") as f:
     config = json.load(f)
 
-game_board = GameBoard(config["boardTiles"])
+game_board = GameBoard(config["boardTiles"], config["tilesRequiredToWin"])
 
 @app.get("/game")
 def get_game_page():
@@ -32,6 +32,7 @@ def get_config():
 @socketio.on("c2s_data_request")
 def c2s_data_request():
     s2c_board_update()
+    s2c_game_state_update()
 
 @socketio.on("c2s_tile_claim")
 def c2s_tile_claim(data):
@@ -40,7 +41,12 @@ def c2s_tile_claim(data):
     letter = data["letter"]
     
     game_board.attempt_to_claim(x, y, letter)
+
     s2c_board_update()
+    s2c_game_state_update()
+
+def s2c_game_state_update():
+    socketio.emit("s2c_game_state_update", game_board.check_game_state(), broadcast=True)
 
 def s2c_board_update():
     socketio.emit("s2c_board_update", game_board.to_dict(), broadcast=True)
