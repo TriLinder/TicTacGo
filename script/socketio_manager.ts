@@ -1,4 +1,5 @@
 import { TicTacGo } from "./main";
+import { GameBoardTile } from "./board/game_board_tile";
 
 export class SocketioManager {
     private ticTacGo: TicTacGo;
@@ -24,6 +25,10 @@ export class SocketioManager {
 
     public c2sDataRequest() {
         this.socketio.emit("c2s_data_request");
+    }
+
+    public c2sTileClaim(tile: GameBoardTile) {
+        this.socketio.emit("c2s_tile_claim", {x: tile.x, y: tile.y, letter: this.ticTacGo.gameBoard.playingAs});
     }
 
     public s2cBoardUpdate(data) {

@@ -44,6 +44,6 @@ export class HudTileClaiming {
     }
 
     private tileClaimButtonClick() {
-        alert("Tile claimed");
+        this.ticTacGo.gameBoard.selectedTile.claim();
     }
 }

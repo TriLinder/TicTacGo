@@ -30,12 +30,12 @@ export class TicTacGo {
         this.geolocationManager = new GeolocationManager(this);
         this.uiManager = new UiManager(this);
 
-        // Update and render the gameboard at 1hz
+        // Update and render the gameboard at 15hz
         setInterval(function() {
             const gameBoardCanvas = (document.getElementById("game_board_canvas") as HTMLCanvasElement);
             this.gameBoard.update();
             this.gameBoard.renderToCanvas(gameBoardCanvas);
-        }.bind(this), 1000);
+        }.bind(this), 1000 / 15);
 
         // Update the UI at 30hz
         setInterval(function() {

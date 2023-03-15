@@ -32,6 +32,10 @@ class GameBoard:
             for y in range(self.size):
                 self.board[x].append(Empty)
 
+    def attempt_to_claim(self, x, y, letter) -> None:
+        if self.board[x][y] == Empty:
+            self.board[x][y] = letter
+
 game_board = GameBoard()
 
 @app.get("/game")
@@ -48,6 +52,15 @@ def get_config():
 
 @socketio.on("c2s_data_request")
 def c2s_data_request():
+    s2c_board_update()
+
+@socketio.on("c2s_tile_claim")
+def c2s_tile_claim(data):
+    x = data["x"]
+    y = data["y"]
+    letter = data["letter"]
+    
+    game_board.attempt_to_claim(x, y, letter)
     s2c_board_update()
 
 def s2c_board_update():

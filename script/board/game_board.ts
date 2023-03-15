@@ -1,5 +1,5 @@
 import { TicTacGo } from "../main";
-import { GameBoardTile, Empty } from "./game_board_tile";
+import { GameBoardTile, Empty, X, O } from "./game_board_tile";
 
 export class GameBoard {
     private ticTacGo: TicTacGo;
@@ -7,10 +7,13 @@ export class GameBoard {
     public board: GameBoardTile[][] = [];
     public selectedTile: GameBoardTile | null;
     public readonly size: number;
+
+    public playingAs: number;
     
     constructor(ticTacGo: TicTacGo, size: number) {
         this.ticTacGo = ticTacGo;
         this.size = size;
+        this.playingAs = X;
 
         this.reset();
     }
@@ -19,7 +22,7 @@ export class GameBoard {
         for (let x = 0; x < this.size; x++) {
             for (let y = 0; y < this.size; y++) {
                 const tile = this.board[x][y];
-                tile.state = data[x][y];
+                tile.setState(data[x][y]);
             }
         }
     }
@@ -64,7 +67,7 @@ export class GameBoard {
             this.board[x] = [];
 
             for (let y = 0; y < this.size; y++) {
-                this.board[x][y] = new GameBoardTile(this.ticTacGo, Empty);
+                this.board[x][y] = new GameBoardTile(this.ticTacGo, x, y, Empty);
             }
         }
 

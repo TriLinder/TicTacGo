@@ -7,13 +7,20 @@ export const O = 2;
 export class GameBoardTile {
     private ticTacGo: TicTacGo;
     
+    public x: number;
+    public y: number;
+
     public state: number;
     public isSelected: boolean;
     
     public geographicBounds: any;
 
-    constructor(ticTacGo: TicTacGo, initalState: number) {
+    constructor(ticTacGo: TicTacGo, x: number, y: number, initalState: number) {
         this.ticTacGo = ticTacGo; 
+        
+        this.x = x;
+        this.y = y;
+
         this.setState(initalState);
     }
 
@@ -83,5 +90,9 @@ export class GameBoardTile {
         else {
             this.state = Empty;
         }
+    }
+
+    public claim() {
+        this.ticTacGo.socketioManager.c2sTileClaim(this);
     }
 }
