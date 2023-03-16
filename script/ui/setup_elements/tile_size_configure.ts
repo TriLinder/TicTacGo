@@ -61,35 +61,35 @@ export class SetupTileSizeConfigure {
     public renderCanvas() {
         // Clear the canvas
         this.ctx.save();
-        this.ctx.clearRect(0, 0, 2048, 2048);
+        this.ctx.clearRect(0, 0, 512, 512);
         
         // Render an empty tile
         const emptyTile = new GameBoardTile(this.ticTacGo, -1, -1, Empty);
-        const tileImage = emptyTile.render(2048);
+        const tileImage = emptyTile.render(512);
 
-        this.ctx.drawImage(tileImage, 256, 256, 2048 - (256 * 2), 2048 - (256 * 2));
+        this.ctx.drawImage(tileImage, 64, 64, 512 - (64 * 2), 512 - (64 * 2));
 
         // Diagonal line
-        this.ctx.lineWidth = 50;
+        this.ctx.lineWidth = 12;
 
-        this.ctx.moveTo(256, 2048 - 256)
-        this.ctx.lineTo(2048 - 256, 256);
+        this.ctx.moveTo(64, 512 - 64)
+        this.ctx.lineTo(512 - 64, 64);
         this.ctx.stroke();
 
         // Render dimensions text
         this.ctx.fillStyle = "black";
-        this.ctx.font = `256px sans-serif`;
+        this.ctx.font = `64px sans-serif`;
         this.ctx.textBaseline = "middle";
         this.ctx.textAlign = "center";
 
         // Side text
-        this.ctx.fillText(`↔ ${Math.round(this.getSideLenght())}m ↔`, 2048 / 2, 2048 - 128);
+        this.ctx.fillText(`↔ ${Math.round(this.getSideLenght())}m ↔`, 512 / 2, 512 - 32);
 
         // Diagonal text
-        this.ctx.translate(2048 / 2, (2048 / 2) - 256);
+        this.ctx.translate(512 / 2, (512 / 2) - 64);
         this.ctx.rotate((Math.PI / 180) * -45);
 
-        this.ctx.fillText(`↔ ${Math.round(this.calculateDiagonalLenght())}m ↔`, -128, 0);
+        this.ctx.fillText(`↔ ${Math.round(this.calculateDiagonalLenght())}m ↔`, -32, 0);
         
         this.ctx.restore();
     }
