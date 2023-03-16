@@ -15,15 +15,19 @@ socketio = SocketIO(app)
 with open("config.json", "r") as f:
     config = json.load(f)
 
-game_board = GameBoard(config["boardTiles"], config["tilesRequiredToWin"])
+game_board = GameBoard(config)
 
 def update_config(new_config):
     global config
+    global game_board
     
     config["boardTiles"] = new_config["boardTiles"]
     config["boardMeters"] = new_config["boardMeters"]
     config["tilesRequiredToWin"] = new_config["tilesRequiredToWin"]
     config["boardPosition"] = new_config["boardPosition"]
+
+    # Don't forget to reset the game board
+    game_board = GameBoard(config)
 
     with open("config.json", "w") as f:
         json.dump(config, f, indent=4)

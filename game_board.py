@@ -16,10 +16,10 @@ class GameBoardTile:
         return f"| {self.state} @ {(self.x, self.y)} |"
 
 class GameBoard:
-    def __init__(self, size: int, tiles_required_to_win: int) -> None:
+    def __init__(self, config) -> None:
         self.board = []
-        self.size = size
-        self.tiles_required_to_win = 3
+        self.size = config["boardTiles"]
+        self.tiles_required_to_win = config["tilesRequiredToWin"]
 
         self.reset()
 
