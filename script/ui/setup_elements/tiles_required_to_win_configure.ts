@@ -28,7 +28,17 @@ export class SetupTilesRequiredToWinCongiure {
         if (this.ticTacGo.uiManager.setup.currentScreen == "tilesRequiredToWinConfigure") {
             // On first frame of this screen
             if (this.screenDiv.style.display == "none") {
-                this.rangeInput.max = this.ticTacGo.uiManager.setup.boardTilesConfigure.getTileAmount().toString();
+                const boardTiles = this.ticTacGo.uiManager.setup.boardTilesConfigure.getTileAmount();
+                
+                this.rangeInput.max = boardTiles.toString();
+                
+                if (boardTiles >= 5) {
+                    this.rangeInput.value = "5";
+                }
+                else {
+                    this.rangeInput.value = boardTiles.toString();
+                }
+
                 this.onInputChange();
 
                 this.screenDiv.style.display = "block";
