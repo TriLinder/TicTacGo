@@ -6,7 +6,7 @@ export class HudSetGameBoardPosition {
     private setGameBoardPositionDiv: HTMLDivElement;
 
     private setPositionButton: HTMLButtonElement;
-    private flyToMarkerButton: HTMLButtonElement;
+    private teleportMarkerButton: HTMLButtonElement;
 
     constructor(ticTacGo: TicTacGo) {
         this.ticTacGo = ticTacGo;
@@ -14,10 +14,10 @@ export class HudSetGameBoardPosition {
         this.setGameBoardPositionDiv = (document.getElementById("set_game_board_position") as HTMLDivElement);
 
         this.setPositionButton = (document.getElementById("set_game_board_position_button") as HTMLButtonElement);
-        this.flyToMarkerButton = (document.getElementById("fly_to_marker_button") as HTMLButtonElement);
+        this.teleportMarkerButton = (document.getElementById("teleport_marker_button") as HTMLButtonElement);
 
         this.setPositionButton.addEventListener("click", this.setPositionClick.bind(this));
-        this.flyToMarkerButton.addEventListener("click", this.flyToMarkerButtonClick.bind(this));
+        this.teleportMarkerButton.addEventListener("click", this.teleportMarkerButtonClick.bind(this));
     }
 
     public update() {
@@ -33,7 +33,7 @@ export class HudSetGameBoardPosition {
         this.ticTacGo.uiManager.setup.sendNewConfiguration();
     }
 
-    public flyToMarkerButtonClick() {
-        this.ticTacGo.mapboxManager.map.flyTo({center: this.ticTacGo.mapboxManager.draggableMarker.getLngLat()});
+    public teleportMarkerButtonClick() {
+        this.ticTacGo.mapboxManager.draggableMarker.setLngLat(this.ticTacGo.mapboxManager.map.getCenter());
     }
 }
