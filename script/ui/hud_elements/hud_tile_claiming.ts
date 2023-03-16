@@ -9,6 +9,7 @@ export class HudTileClaiming {
     private tileClaimable: HTMLDivElement;
     
     private tileClaimButton: HTMLButtonElement;
+    private flyToGameBoardButton: HTMLButtonElement
 
     constructor(ticTacGo: TicTacGo) {
         this.ticTacGo = ticTacGo;
@@ -18,7 +19,10 @@ export class HudTileClaiming {
         this.tileClaimable = (document.getElementById("tile_claimable") as HTMLDivElement);
 
         this.tileClaimButton = (document.getElementById("tile_claim_button") as HTMLButtonElement);
+        this.flyToGameBoardButton = (document.getElementById("fly_to_game_board_button") as HTMLButtonElement);
+
         this.tileClaimButton.addEventListener("click", this.tileClaimButtonClick.bind(this));
+        this.flyToGameBoardButton.addEventListener("click", this.flyToGameBoardButtonClick.bind(this));
     }
 
     public update() {
@@ -49,5 +53,9 @@ export class HudTileClaiming {
 
     private tileClaimButtonClick() {
         this.ticTacGo.gameBoard.selectedTile.claim();
+    }
+
+    private flyToGameBoardButtonClick() {
+        this.ticTacGo.mapboxManager.map.flyTo({center: this.ticTacGo.configManager.config["boardPosition"]});
     }
 }
