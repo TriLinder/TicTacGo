@@ -16,6 +16,7 @@ export class HudWinner {
         this.winnerText = (document.getElementById("winner_text") as HTMLElement);
 
         this.resetGameButton = (document.getElementById("reset_game_button") as HTMLButtonElement);
+        this.resetGameButton.addEventListener("click", this.resetGameButtonClick.bind(this));
     }
 
     public update() {
@@ -46,5 +47,9 @@ export class HudWinner {
                 this.winnerText.innerHTML = "O won!";
                 return;
         }
+    }
+
+    private resetGameButtonClick() {
+        this.ticTacGo.uiManager.setup.currentScreen = "tileSizeConfigure";
     }
 }
