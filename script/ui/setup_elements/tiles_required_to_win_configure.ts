@@ -55,7 +55,12 @@ export class SetupTilesRequiredToWinCongiure {
     }
 
     private onInputChange() {
-        this.countText.textContent = `${this.getTileCount()} tile(s)`;       
+        if (this.getTileCount() > 1) {
+            this.countText.textContent = `${this.getTileCount()} tiles`;
+        }
+        else {
+            this.countText.textContent = "1 tile";
+        }
     }
 
     private continueButtonClick() {
