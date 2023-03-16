@@ -27,7 +27,7 @@ export class SetupBoardTilesConfigure {
 
     public update() {
         if (this.ticTacGo.uiManager.setup.currentScreen == "boardTilesConfigure") {
-            // On load
+            // On first frame of this screen
             if (this.boardTilesConfigureDiv.style.display == "none") {
                 this.boardTilesInput.value = "3";
                 this.renderCanvas();

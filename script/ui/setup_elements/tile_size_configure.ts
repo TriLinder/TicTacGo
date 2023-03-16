@@ -16,10 +16,11 @@ export class SetupTileSizeConfigure {
         this.ticTacGo = ticTacGo;
 
         this.tileSizeConfigureDiv = (document.getElementById("tile_size_configure_div") as HTMLDivElement);
+        
         this.tileSizeInput = (document.getElementById("tile_size_input") as HTMLInputElement);
-
         this.continueButton = (document.getElementById("tile_size_configure_continue_button") as HTMLButtonElement);
 
+        this.tileSizeInput.addEventListener("change", this.renderCanvas.bind(this));
         this.continueButton.addEventListener("click", function() {this.ticTacGo.uiManager.setup.currentScreen = "boardTilesConfigure";}.bind(this));
 
         this.canvas = (document.getElementById("tile_size_canvas") as HTMLCanvasElement);
@@ -28,7 +29,11 @@ export class SetupTileSizeConfigure {
 
     public update() {
         if (this.ticTacGo.uiManager.setup.currentScreen == "tileSizeConfigure") {
-            this.tileSizeConfigureDiv.style.display = "block";
+            // On first frame of this screen
+            if (this.tileSizeConfigureDiv.style.display == "none") {
+                this.renderCanvas();
+                this.tileSizeConfigureDiv.style.display = "block";
+            }
         }
         else {
             this.tileSizeConfigureDiv.style.display = "none";
@@ -37,9 +42,8 @@ export class SetupTileSizeConfigure {
 
         if (!this.getSideLenght()) {
             this.tileSizeInput.value = "0";
+            this.renderCanvas();
         }
-
-        this.renderCanvas();
     }
 
     private getSideLenght() {
