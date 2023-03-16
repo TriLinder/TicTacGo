@@ -77,7 +77,7 @@
     overflow-y: hidden;
 }
 
-#tile_size_canvas {
+.setup_canvas {
     width: 15em;
     max-height: 15em;
     aspect-ratio: 1 / 1;
