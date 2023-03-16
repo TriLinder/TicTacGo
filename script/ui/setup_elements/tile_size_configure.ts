@@ -46,7 +46,7 @@ export class SetupTileSizeConfigure {
         }
     }
 
-    private getSideLenght() {
+    public getSideLenght() {
         const sideLenght = Number(this.tileSizeInput.value);
 
         if (sideLenght < 0 || sideLenght > 99999) {
@@ -56,7 +56,7 @@ export class SetupTileSizeConfigure {
         return sideLenght;
     }
 
-    private calculateDiagonalLenght() {
+    public calculateDiagonalLenght() {
         const sideLenght = this.getSideLenght();
 
         return Math.sqrt(Math.pow(sideLenght, 2) * 2);

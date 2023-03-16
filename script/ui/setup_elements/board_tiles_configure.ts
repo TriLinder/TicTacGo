@@ -46,7 +46,7 @@ export class SetupBoardTilesConfigure {
         }
     }
 
-    private getTileAmount() {
+    public getTileAmount() {
         const tileAmount = Number(this.boardTilesInput.value);
 
         if (tileAmount < 2 || tileAmount > 20) {

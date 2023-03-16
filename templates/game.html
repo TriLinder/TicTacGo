@@ -97,6 +97,17 @@
           <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
         </div>
       </div>
+
+      <div id="tiles_required_to_win_configure_div" class="popup" style="display: none;">
+        <h1>Tiles required to win</h1>
+
+        <input id="tiles_required_to_win_configure_input" type="range" min="1" max="1" value="3" class="form-range">
+        <p id="tiles_required_to_win_configure_tile_count_text">3 tiles</p>
+
+        <div class="d-grid gap-2">
+          <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+        </div>
+      </div>
     </div>
 
     <canvas id="game_board_canvas" width="2048" height="2048"></canvas>
