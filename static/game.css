@@ -77,6 +77,15 @@
     overflow-y: hidden;
 }
 
+.popup_content {
+    position: relative;
+    left: 50%;
+
+    transform: translate(-50% , 0);
+    
+    max-width: 25em;
+}
+
 .setup_canvas {
     width: 15em;
     max-height: 15em;

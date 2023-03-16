@@ -44,68 +44,75 @@
 
     <div id="setup_div" class="overlay" style="display: none;">
       <div id="choose_team_div" class="popup" style="display: none;">
-        <h1>Welcome!</h1>
-        <p>Choose your team.</p>
+        <div class="popup_content">
+          <h1>Welcome!</h1>
+          <p>Choose your team.</p>
 
-        <div class="d-grid gap-2">
-          <button id="play_as_x_button" class="btn btn-primary" type="button">Play as X</button>
-          <button id="play_as_o_button" class="btn btn-primary" type="button">Play as O</button>
+          <div class="d-grid gap-2">
+            <button id="play_as_x_button" class="btn btn-primary" type="button">Play as X</button>
+            <button id="play_as_o_button" class="btn btn-primary" type="button">Play as O</button>
+          </div>
+
+          <br>
+
+          <p><a id="configure_link" href="#">Configure</a></p>
         </div>
-
-        <br>
-
-        <p><a id="configure_link" href="#">Configure</a></p>
-
       </div>
 
       <div id="tile_size_configure_div" class="popup" style="display: none;">
-        <h1>Tile size</h1>
+        <div class="popup_content">
+          <h1>Tile size</h1>
 
-        <canvas id="tile_size_canvas" class="setup_canvas" width="512" height="512"></canvas>
+          <canvas id="tile_size_canvas" class="setup_canvas" width="512" height="512"></canvas>
 
-        <div class="col-auto">
-          <input id="tile_size_input" type="number" min="0.5" max="99999" value="100" class="form-control">
-        </div>
+          <div class="col-auto">
+            <input id="tile_size_input" type="number" min="0.5" max="99999" value="100" class="form-control">
+          </div>
 
-        <div class="col-auto">
-          <span class="form-text">
-            meters.
-          </span>
-        </div>
+          <div class="col-auto">
+            <span class="form-text">
+              meters.
+            </span>
+          </div>
 
-        <div class="d-grid gap-2">
-          <button id="tile_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          <div class="d-grid gap-2">
+            <button id="tile_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          </div>
         </div>
       </div>
 
       <div id="board_tiles_configure_div" class="popup" style="display: none;">
-        <h1>Board size</h1>
+        <div class="popup_content">
+          <h1>Board size</h1>
 
-        <canvas id="board_tiles_configure_canvas" class="setup_canvas" width="512" height="512"></canvas>
+          <canvas id="board_tiles_configure_canvas" class="setup_canvas" width="512" height="512"></canvas>
 
-        <div class="col-auto">
-          <input id="board_tiles_configure_input" type="number" min="2" max="20" value="3" class="form-control">
-        </div>
+          <div class="col-auto">
+            <input id="board_tiles_configure_input" type="number" min="2" max="20" value="3" class="form-control">
+          </div>
 
-        <div class="col-auto">
-          <span class="form-text">
-            tiles.
-          </span>
-        </div>
+          <div class="col-auto">
+            <span class="form-text">
+              tiles.
+            </span>
+          </div>
 
-        <div class="d-grid gap-2">
-          <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          <div class="d-grid gap-2">
+            <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          </div>
         </div>
       </div>
 
       <div id="tiles_required_to_win_configure_div" class="popup" style="display: none;">
-        <h1>Tiles required to win</h1>
+        <div class="popup_content">
+          <h1>Tiles required to win</h1>
 
-        <input id="tiles_required_to_win_configure_input" type="range" min="1" max="1" value="3" class="form-range">
-        <p id="tiles_required_to_win_configure_tile_count_text">3 tiles</p>
+          <input id="tiles_required_to_win_configure_input" type="range" min="1" max="1" value="3" class="form-range">
+          <p id="tiles_required_to_win_configure_tile_count_text">3 tiles</p>
 
-        <div class="d-grid gap-2">
-          <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          <div class="d-grid gap-2">
+            <button id="board_size_configure_continue_button" class="btn btn-primary" type="button">Continue</button>
+          </div>
         </div>
       </div>
     </div>
