@@ -18,6 +18,7 @@ export class SocketioManager {
 
         this.socketio.on("s2c_board_update", this.s2cBoardUpdate.bind(this));
         this.socketio.on("s2c_game_state_update", this.s2cGameStateUpdate.bind(this));
+        this.socketio.on("s2c_force_reload", this.s2cForceReload.bind(this));
     }
 
     private onConnect() {
@@ -44,5 +45,9 @@ export class SocketioManager {
 
     public s2cBoardUpdate(data) {
         this.ticTacGo.gameBoard.parseBoardUpdateSocket(data);
+    }
+
+    public s2cForceReload() {
+        window.location.reload();
     }
 }

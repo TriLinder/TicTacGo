@@ -17,6 +17,17 @@ with open("config.json", "r") as f:
 
 game_board = GameBoard(config["boardTiles"], config["tilesRequiredToWin"])
 
+def update_config(new_config):
+    global config
+    
+    config["boardTiles"] = new_config["boardTiles"]
+    config["boardMeters"] = new_config["boardMeters"]
+    config["tilesRequiredToWin"] = new_config["tilesRequiredToWin"]
+    config["boardPosition"] = new_config["boardPosition"]
+
+    with open("config.json", "w") as f:
+        json.dump(config, f, indent=4)
+
 @app.get("/game")
 def get_game_page():
     return render_template("game.html")
@@ -45,11 +56,19 @@ def c2s_tile_claim(data):
     s2c_board_update()
     s2c_game_state_update()
 
+@socketio.on("c2s_config_update")
+def c2s_config_update(new_config):
+    update_config(new_config)
+    s2c_force_reload()
+
 def s2c_game_state_update():
     socketio.emit("s2c_game_state_update", game_board.check_game_state(), broadcast=True)
 
 def s2c_board_update():
     socketio.emit("s2c_board_update", game_board.to_dict(), broadcast=True)
+
+def s2c_force_reload():
+    socketio.emit("s2c_force_reload", {}, broadcast=True)
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, debug=True, ssl_context=ssl_context)
