@@ -21,7 +21,7 @@ export class HudWinner {
     public update() {
         this.winnerDiv.style.display = "none";
 
-        if (!this.ticTacGo.playable) {
+        if (!this.ticTacGo.uiManager.playable && !this.ticTacGo.uiManager.pickingGameBoardPosition) {
             this.winnerDiv.style.display = "block";
         }
     }

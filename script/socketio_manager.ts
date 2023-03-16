@@ -34,7 +34,7 @@ export class SocketioManager {
     }
 
     public s2cGameStateUpdate(data) {
-        this.ticTacGo.playable = data["playable"];
+        this.ticTacGo.uiManager.playable = data["playable"];
         this.ticTacGo.uiManager.parseGameStatus(data);
     }
 

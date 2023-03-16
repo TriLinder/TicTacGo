@@ -9,6 +9,7 @@ export class MapboxManager {
     public gameBoardBounds: any;
 
     public geolocateControl: any;
+    public draggableMarker: any;
 
     constructor(ticTacGo: TicTacGo, mapboxgl: any) {
         this.ticTacGo = ticTacGo;
@@ -65,5 +66,14 @@ export class MapboxManager {
             this.geolocateControl.trigger();
 
         }.bind(this));
+    }
+
+    public addDraggableMarker() {
+        this.draggableMarker = new this.mapboxgl.Marker({
+            draggable: true
+        });
+
+        this.draggableMarker.setLngLat(this.ticTacGo.configManager.config["boardPosition"]);
+        this.draggableMarker.addTo(this.map);
     }
 }

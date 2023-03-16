@@ -26,7 +26,7 @@ export class HudTileClaiming {
         this.tileAlreadyClaimedDiv.style.display = "none";
         this.tileClaimable.style.display = "none";
 
-        if (!this.ticTacGo.playable) {
+        if (!this.ticTacGo.uiManager.playable || this.ticTacGo.uiManager.pickingGameBoardPosition) {
             return;
         }
 
