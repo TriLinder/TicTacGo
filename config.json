@@ -1,0 +1,10 @@
+{
+    "mapboxToken": " PLACE YOUR API KEY HERE. VISIT https://account.mapbox.com/ ",
+    "boardPosition": [
+        14.41177,
+        50.08643
+    ],
+    "boardMeters": 750,
+    "boardTiles": 3,
+    "tilesRequiredToWin": 3
+}
