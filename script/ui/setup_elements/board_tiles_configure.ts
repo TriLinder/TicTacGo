@@ -4,8 +4,8 @@ import { GameBoard } from "../../board/game_board";
 export class SetupBoardTilesConfigure {
     private ticTacGo: TicTacGo;
 
-    private boardTilesConfigureDiv: HTMLDivElement;
-    private boardTilesInput: HTMLInputElement;
+    private screenDiv: HTMLDivElement;
+    private countInput: HTMLInputElement;
 
     private continueButton: HTMLButtonElement;
 
@@ -14,12 +14,12 @@ export class SetupBoardTilesConfigure {
     constructor(ticTacGo: TicTacGo) {
         this.ticTacGo = ticTacGo;
 
-        this.boardTilesConfigureDiv = (document.getElementById("board_tiles_configure_div") as HTMLDivElement);
+        this.screenDiv = (document.getElementById("board_tiles_configure_div") as HTMLDivElement);
 
-        this.boardTilesInput = (document.getElementById("board_tiles_configure_input") as HTMLInputElement);
+        this.countInput = (document.getElementById("board_tiles_configure_input") as HTMLInputElement);
         this.continueButton = (document.getElementById("board_size_configure_continue_button") as HTMLButtonElement);
 
-        this.boardTilesInput.addEventListener("change", this.renderCanvas.bind(this));
+        this.countInput.addEventListener("change", this.renderCanvas.bind(this));
         this.continueButton.addEventListener("click", function() {this.ticTacGo.uiManager.setup.currentScreen = "tilesRequiredToWinConfigure";}.bind(this));
 
         this.canvas = (document.getElementById("board_tiles_configure_canvas") as HTMLCanvasElement);
@@ -28,26 +28,26 @@ export class SetupBoardTilesConfigure {
     public update() {
         if (this.ticTacGo.uiManager.setup.currentScreen == "boardTilesConfigure") {
             // On first frame of this screen
-            if (this.boardTilesConfigureDiv.style.display == "none") {
-                this.boardTilesInput.value = "3";
+            if (this.screenDiv.style.display == "none") {
+                this.countInput.value = "3";
                 this.renderCanvas();
                 
-                this.boardTilesConfigureDiv.style.display = "block";
+                this.screenDiv.style.display = "block";
             }
         }
         else {
-            this.boardTilesConfigureDiv.style.display = "none";
+            this.screenDiv.style.display = "none";
             return;
         }
 
         if (!this.getTileAmount()) {
-            this.boardTilesInput.value = "3";
+            this.countInput.value = "3";
             this.renderCanvas();
         }
     }
 
     public getTileAmount() {
-        const tileAmount = Number(this.boardTilesInput.value);
+        const tileAmount = Number(this.countInput.value);
 
         if (tileAmount < 2 || tileAmount > 20) {
             return null;

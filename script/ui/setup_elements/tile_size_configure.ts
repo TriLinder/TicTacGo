@@ -4,7 +4,7 @@ import { Empty, GameBoardTile } from "../../board/game_board_tile";
 export class SetupTileSizeConfigure {
     private ticTacGo: TicTacGo;
 
-    private tileSizeConfigureDiv: HTMLDivElement;
+    private screenDiv: HTMLDivElement;
     private tileSizeInput: HTMLInputElement;
 
     private continueButton: HTMLButtonElement;
@@ -15,7 +15,7 @@ export class SetupTileSizeConfigure {
     constructor(ticTacGo: TicTacGo) {
         this.ticTacGo = ticTacGo;
 
-        this.tileSizeConfigureDiv = (document.getElementById("tile_size_configure_div") as HTMLDivElement);
+        this.screenDiv = (document.getElementById("tile_size_configure_div") as HTMLDivElement);
         
         this.tileSizeInput = (document.getElementById("tile_size_input") as HTMLInputElement);
         this.continueButton = (document.getElementById("tile_size_configure_continue_button") as HTMLButtonElement);
@@ -30,13 +30,13 @@ export class SetupTileSizeConfigure {
     public update() {
         if (this.ticTacGo.uiManager.setup.currentScreen == "tileSizeConfigure") {
             // On first frame of this screen
-            if (this.tileSizeConfigureDiv.style.display == "none") {
+            if (this.screenDiv.style.display == "none") {
                 this.renderCanvas();
-                this.tileSizeConfigureDiv.style.display = "block";
+                this.screenDiv.style.display = "block";
             }
         }
         else {
-            this.tileSizeConfigureDiv.style.display = "none";
+            this.screenDiv.style.display = "none";
             return;
         }
 
