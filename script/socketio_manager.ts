@@ -33,6 +33,10 @@ export class SocketioManager {
         this.socketio.emit("c2s_tile_claim", {x: tile.x, y: tile.y, letter: this.ticTacGo.gameBoard.playingAs});
     }
 
+    public c2sConfigUpdate(newConfig) {
+        this.socketio.emit("c2s_config_update", newConfig);
+    }
+
     public s2cGameStateUpdate(data) {
         this.ticTacGo.uiManager.playable = data["playable"];
         this.ticTacGo.uiManager.parseGameStatus(data);

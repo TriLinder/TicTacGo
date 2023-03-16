@@ -25,6 +25,7 @@ export class HudSetGameBoardPosition {
     }
 
     public setPositionClick() {
-        alert("Sending new configuration to the server.");
+        this.setPositionButton.disabled = true;
+        this.ticTacGo.uiManager.setup.sendNewConfiguration();
     }
 }

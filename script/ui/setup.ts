@@ -43,4 +43,20 @@ export class Setup {
         this.boardTilesConfigure.update();
         this.tilesRequiredToWinConfgiure.update();
     }
+
+    public sendNewConfiguration() {
+        const boardTiles = this.boardTilesConfigure.getTileAmount();
+        const boardMeters = this.tileSizeConfigure.getSideLenght() * boardTiles;
+        const tilesRequiredToWin = this.tilesRequiredToWinConfgiure.getTileCount();
+        const boardPosition = this.ticTacGo.mapboxManager.draggableMarker.getLngLat().toArray();
+
+        const newConfig = {
+                            boardTiles: boardTiles, 
+                            boardMeters: boardMeters, 
+                            tilesRequiredToWin: tilesRequiredToWin, 
+                            boardPosition: boardPosition
+                        };
+
+        this.ticTacGo.socketioManager.c2sConfigUpdate(newConfig);
+    }
 }
