@@ -66,13 +66,13 @@ def c2s_config_update(new_config):
     s2c_force_reload()
 
 def s2c_game_state_update():
-    socketio.emit("s2c_game_state_update", game_board.check_game_state(), broadcast=True)
+    socketio.emit("s2c_game_state_update", game_board.check_game_state())
 
 def s2c_board_update():
-    socketio.emit("s2c_board_update", game_board.to_dict(), broadcast=True)
+    socketio.emit("s2c_board_update", game_board.to_dict())
 
 def s2c_force_reload():
-    socketio.emit("s2c_force_reload", {}, broadcast=True)
+    socketio.emit("s2c_force_reload", {})
 
 if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, debug=True, ssl_context=ssl_context)
