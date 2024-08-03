@@ -82,4 +82,4 @@ def s2c_force_reload():
     socketio.emit("s2c_force_reload", {})
 
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True, ssl_context=ssl_context)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=False, ssl_context=ssl_context)
