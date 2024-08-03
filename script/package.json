@@ -1,0 +1,15 @@
+{
+  "name": "tictacgo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --outDir build && browserify ./build/main.js --outfile ./build/bundle.js"
+  },
+  "author": "",
+  "license": "",
+  "description": "",
+  "devDependencies": {
+    "browserify": "^17.0.0",
+    "typescript": "^5.5.4"
+  }
+}
