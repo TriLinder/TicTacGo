@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, redirect
 from flask_socketio import SocketIO
 from pathlib import Path
 import json
@@ -34,6 +34,10 @@ def update_config(new_config):
 
     with open("config.json", "w") as f:
         json.dump(config, f, indent=4)
+
+@app.get("/")
+def get_index_page():
+    return redirect("/game")
 
 @app.get("/game")
 def get_game_page():
