@@ -7,7 +7,10 @@ import ssl
 from game_board import GameBoard
 
 ssl_context = ssl.SSLContext()
-ssl_context.load_cert_chain("cert.pem", "key.pem")
+try:
+    ssl_context.load_cert_chain("cert.pem", "key.pem")
+except FileNotFoundError:
+    raise FileNotFoundError("Please generate and provide an SSL certificate. Failed to load `cert.pem` and `key.pem` in the working directory.")
 
 app = Flask(__name__)
 socketio = SocketIO(app)

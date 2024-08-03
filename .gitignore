@@ -1,4 +1,7 @@
 *.pyc
 venv/*
-config.json
 script/build/*
+
+cert.pem
+key.pem
+config.json
