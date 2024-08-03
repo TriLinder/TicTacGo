@@ -1,5 +1,7 @@
 *.pyc
 venv/*
+
+node_modules/*
 script/build/*
 
 cert.pem

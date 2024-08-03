@@ -45,7 +45,7 @@ def get_game_page():
 
 @app.get("/game_bundle.js")
 def get_game_bundle_js():
-    return send_file(Path("script/build/bundle.js"))
+    return send_file(Path("script/build/game_bundle.js"))
 
 @app.get("/config")
 def get_config():
